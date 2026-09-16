@@ -7,7 +7,9 @@ export function CourseCard({ course }: { course: Course }) {
     <article className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-lg">
       <div className="flex items-start justify-between gap-3 border-b-4 border-gold bg-primary px-5 py-4 text-primary-foreground">
         <div className="min-w-0">
-          <p className="text-[11px] font-bold uppercase tracking-widest text-gold">{course.category}</p>
+          <p className="text-[11px] font-bold uppercase tracking-widest text-gold">
+            {course.category}
+          </p>
           <h3 className="mt-1 text-lg font-bold leading-snug">{course.title}</h3>
         </div>
         {course.badge && (

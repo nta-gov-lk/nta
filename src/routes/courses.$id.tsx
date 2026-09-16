@@ -17,7 +17,12 @@ export const Route = createFileRoute("/courses/$id")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return { meta: [{ title: "Course not found | National Television Academy" }, { name: "robots", content: "noindex" }] };
+      return {
+        meta: [
+          { title: "Course not found | National Television Academy" },
+          { name: "robots", content: "noindex" },
+        ],
+      };
     }
     const { course } = loaderData;
     return {
@@ -40,20 +45,34 @@ function CourseDetail() {
   return (
     <>
       <div className="relative overflow-hidden bg-primary px-4 py-16 text-primary-foreground">
-        <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-gold/25 blur-3xl" aria-hidden />
+        <div
+          className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-gold/25 blur-3xl"
+          aria-hidden
+        />
         <div className="relative mx-auto max-w-7xl">
-          <Link to="/courses" className="text-xs font-bold uppercase tracking-widest text-gold hover:underline">
+          <Link
+            to="/courses"
+            className="text-xs font-bold uppercase tracking-widest text-gold hover:underline"
+          >
             ← All courses
           </Link>
           <div className="mt-4 flex flex-wrap items-center gap-2">
-            <span className="rounded-full bg-primary-foreground/15 px-3 py-1 text-xs font-bold">{course.category}</span>
-            <span className="rounded-full bg-primary-foreground/15 px-3 py-1 text-xs font-bold">{course.level}</span>
+            <span className="rounded-full bg-primary-foreground/15 px-3 py-1 text-xs font-bold">
+              {course.category}
+            </span>
+            <span className="rounded-full bg-primary-foreground/15 px-3 py-1 text-xs font-bold">
+              {course.level}
+            </span>
             {course.badge && (
-              <span className="rounded-full bg-gold px-3 py-1 text-xs font-bold text-gold-foreground">{course.badge}</span>
+              <span className="rounded-full bg-gold px-3 py-1 text-xs font-bold text-gold-foreground">
+                {course.badge}
+              </span>
             )}
           </div>
           <h1 className="mt-4 max-w-3xl text-4xl font-extrabold sm:text-5xl">{course.title}</h1>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-primary-foreground/85">{course.summary}</p>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-primary-foreground/85">
+            {course.summary}
+          </p>
         </div>
       </div>
 
@@ -62,14 +81,19 @@ function CourseDetail() {
           <div className="space-y-12">
             <div>
               <h2 className="brand-rule text-2xl font-bold">Course Overview</h2>
-              <p className="mt-6 text-sm leading-relaxed text-muted-foreground">{course.overview}</p>
+              <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+                {course.overview}
+              </p>
             </div>
 
             <div>
               <h2 className="brand-rule text-2xl font-bold">Learning Outcomes</h2>
               <ul className="mt-6 grid gap-3 sm:grid-cols-2">
                 {course.outcomes.map((o) => (
-                  <li key={o} className="flex items-start gap-3 rounded-lg border border-border bg-card p-4">
+                  <li
+                    key={o}
+                    className="flex items-start gap-3 rounded-lg border border-border bg-card p-4"
+                  >
                     <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden />
                     <span className="text-sm">{o}</span>
                   </li>
@@ -81,7 +105,10 @@ function CourseDetail() {
               <h2 className="brand-rule text-2xl font-bold">Module Syllabus</h2>
               <ol className="mt-6 space-y-3">
                 {course.modules.map((m, i) => (
-                  <li key={m.title} className="flex gap-4 rounded-lg border border-border bg-card p-5">
+                  <li
+                    key={m.title}
+                    className="flex gap-4 rounded-lg border border-border bg-card p-5"
+                  >
                     <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary font-display text-sm font-bold text-primary-foreground">
                       {i + 1}
                     </span>
@@ -112,7 +139,10 @@ function CourseDetail() {
                 <ul className="mt-6 space-y-2 text-sm text-muted-foreground">
                   {course.requirements.map((r) => (
                     <li key={r} className="flex items-start gap-3">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" aria-hidden />
+                      <span
+                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
+                        aria-hidden
+                      />
                       {r}
                     </li>
                   ))}
@@ -122,7 +152,10 @@ function CourseDetail() {
                 <h2 className="brand-rule text-2xl font-bold">Career Paths</h2>
                 <div className="mt-6 flex flex-wrap gap-2">
                   {course.careers.map((c) => (
-                    <span key={c} className="rounded-full bg-primary-soft px-3 py-1.5 text-sm font-semibold text-primary-dark">
+                    <span
+                      key={c}
+                      className="rounded-full bg-primary-soft px-3 py-1.5 text-sm font-semibold text-primary-dark"
+                    >
                       {c}
                     </span>
                   ))}
@@ -135,8 +168,12 @@ function CourseDetail() {
               <Accordion type="single" collapsible className="mt-6">
                 {course.faqs.map((f) => (
                   <AccordionItem key={f.q} value={f.q}>
-                    <AccordionTrigger className="text-left text-sm font-bold">{f.q}</AccordionTrigger>
-                    <AccordionContent className="text-sm text-muted-foreground">{f.a}</AccordionContent>
+                    <AccordionTrigger className="text-left text-sm font-bold">
+                      {f.q}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-sm text-muted-foreground">
+                      {f.a}
+                    </AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>
@@ -145,7 +182,9 @@ function CourseDetail() {
 
           <aside className="lg:sticky lg:top-28 lg:self-start">
             <div className="rounded-xl border border-border bg-card p-6">
-              <h2 className="font-display text-sm font-bold uppercase tracking-widest text-primary">Course Details</h2>
+              <h2 className="font-display text-sm font-bold uppercase tracking-widest text-primary">
+                Course Details
+              </h2>
               <dl className="mt-5 space-y-4 text-sm">
                 <div className="flex items-start gap-3">
                   <Clock className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden />
@@ -172,7 +211,9 @@ function CourseDetail() {
                   <GraduationCap className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden />
                   <div>
                     <dt className="font-semibold">Award</dt>
-                    <dd className="text-muted-foreground">{course.level} — National Television Academy</dd>
+                    <dd className="text-muted-foreground">
+                      {course.level} — National Television Academy
+                    </dd>
                   </div>
                 </div>
               </dl>

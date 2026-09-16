@@ -18,11 +18,17 @@ export function TopBar() {
         <p className="min-w-0 truncate font-medium tracking-wide opacity-95">{contact.tagline}</p>
 
         <div className="flex shrink-0 flex-wrap items-center justify-end gap-x-4 gap-y-2">
-          <a href={`tel:${contact.phone.replace(/\s/g, "")}`} className="hidden items-center gap-1.5 hover:text-gold md:flex">
+          <a
+            href={`tel:${contact.phone.replace(/\s/g, "")}`}
+            className="hidden items-center gap-1.5 hover:text-gold md:flex"
+          >
             <Phone className="h-3.5 w-3.5" aria-hidden />
             {contact.phone}
           </a>
-          <a href={`mailto:${contact.email}`} className="hidden items-center gap-1.5 hover:text-gold md:flex">
+          <a
+            href={`mailto:${contact.email}`}
+            className="hidden items-center gap-1.5 hover:text-gold md:flex"
+          >
             <Mail className="h-3.5 w-3.5" aria-hidden />
             {contact.email}
           </a>
@@ -35,7 +41,9 @@ export function TopBar() {
                 onClick={() => setLang(l.code)}
                 aria-pressed={lang === l.code}
                 className={`px-2.5 py-1 text-[11px] font-semibold transition-colors ${
-                  lang === l.code ? "bg-gold text-gold-foreground" : "hover:bg-primary-foreground/10"
+                  lang === l.code
+                    ? "bg-gold text-gold-foreground"
+                    : "hover:bg-primary-foreground/10"
                 }`}
               >
                 {l.label}
@@ -47,7 +55,12 @@ export function TopBar() {
             {contact.socials.map((s) => {
               const Icon = socialIcons[s.label as keyof typeof socialIcons];
               return (
-                <a key={s.label} href={s.href} aria-label={s.label} className="opacity-90 hover:text-gold hover:opacity-100">
+                <a
+                  key={s.label}
+                  href={s.href}
+                  aria-label={s.label}
+                  className="opacity-90 hover:text-gold hover:opacity-100"
+                >
                   <Icon className="h-4 w-4" aria-hidden />
                 </a>
               );

@@ -16,7 +16,10 @@ export const Route = createFileRoute("/student-life")({
           "Studio environment, media equipment, student showcases and industry workshops at the National Television Academy.",
       },
       { property: "og:title", content: "Student Life at the National Television Academy" },
-      { property: "og:description", content: "What it is like to train inside a national broadcaster's studios." },
+      {
+        property: "og:description",
+        content: "What it is like to train inside a national broadcaster's studios.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -59,10 +62,30 @@ function StudentLifePage() {
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <img src={studioA} alt="Anchoring practice in the studio" loading="lazy" className="h-56 w-full rounded-xl object-cover" />
-            <img src={studioB} alt="Camera setup during a practical session" loading="lazy" className="mt-8 h-56 w-full rounded-xl object-cover" />
-            <img src={acting} alt="Drama rehearsal in progress" loading="lazy" className="h-56 w-full rounded-xl object-cover" />
-            <img src={dubbing} alt="Voice recording booth" loading="lazy" className="mt-8 h-56 w-full rounded-xl object-cover" />
+            <img
+              src={studioA}
+              alt="Anchoring practice in the studio"
+              loading="lazy"
+              className="h-56 w-full rounded-xl object-cover"
+            />
+            <img
+              src={studioB}
+              alt="Camera setup during a practical session"
+              loading="lazy"
+              className="mt-8 h-56 w-full rounded-xl object-cover"
+            />
+            <img
+              src={acting}
+              alt="Drama rehearsal in progress"
+              loading="lazy"
+              className="h-56 w-full rounded-xl object-cover"
+            />
+            <img
+              src={dubbing}
+              alt="Voice recording booth"
+              loading="lazy"
+              className="mt-8 h-56 w-full rounded-xl object-cover"
+            />
           </div>
         </div>
       </Section>
@@ -86,7 +109,10 @@ function StudentLifePage() {
             <SectionHeading eyebrow="Equipment" title="Media equipment you will use" />
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
               {equipment.map((e) => (
-                <li key={e} className="rounded-lg border border-border bg-card px-4 py-3 text-sm font-medium">
+                <li
+                  key={e}
+                  className="rounded-lg border border-border bg-card px-4 py-3 text-sm font-medium"
+                >
                   {e}
                 </li>
               ))}

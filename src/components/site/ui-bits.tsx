@@ -33,9 +33,17 @@ export function SectionHeading({
   return (
     <div className={`${align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}`}>
       {eyebrow && <p className={`eyebrow ${light ? "text-gold" : "text-primary"}`}>{eyebrow}</p>}
-      <h2 className={`mt-3 text-3xl font-extrabold sm:text-4xl ${light ? "text-white" : "text-foreground"}`}>{title}</h2>
+      <h2
+        className={`mt-3 text-3xl font-extrabold sm:text-4xl ${light ? "text-white" : "text-foreground"}`}
+      >
+        {title}
+      </h2>
       {intro && (
-        <p className={`mt-4 text-base leading-relaxed ${light ? "text-white/75" : "text-muted-foreground"}`}>{intro}</p>
+        <p
+          className={`mt-4 text-base leading-relaxed ${light ? "text-white/75" : "text-muted-foreground"}`}
+        >
+          {intro}
+        </p>
       )}
       <div
         className={`mt-6 h-1 w-16 bg-gradient-to-r from-primary to-gold ${align === "center" ? "mx-auto" : ""}`}
@@ -63,7 +71,9 @@ export function PageHero({
       <div className="relative mx-auto max-w-7xl">
         <p className="eyebrow text-gold">{eyebrow}</p>
         <h1 className="mt-3 max-w-3xl text-4xl font-extrabold sm:text-5xl">{title}</h1>
-        <p className="mt-4 max-w-2xl text-base leading-relaxed text-primary-foreground/85">{intro}</p>
+        <p className="mt-4 max-w-2xl text-base leading-relaxed text-primary-foreground/85">
+          {intro}
+        </p>
       </div>
     </div>
   );

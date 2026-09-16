@@ -12,9 +12,18 @@ type Shot = { src: string; alt: string; category: string; tall?: boolean };
 export const galleryItems: Shot[] = [
   { src: studioA, alt: "Student presenting from the studio news desk", category: "Presenting" },
   { src: acting, alt: "Acting workshop rehearsal on stage", category: "Acting", tall: true },
-  { src: studioB, alt: "Students setting up a broadcast camera and lights", category: "Camera & Lighting" },
+  {
+    src: studioB,
+    alt: "Students setting up a broadcast camera and lights",
+    category: "Camera & Lighting",
+  },
   { src: dubbing, alt: "Recording booth with microphone and script", category: "Dubbing" },
-  { src: hero, alt: "Television studio floor lit for a programme", category: "Facilities", tall: true },
+  {
+    src: hero,
+    alt: "Television studio floor lit for a programme",
+    category: "Facilities",
+    tall: true,
+  },
   { src: studioB, alt: "Practical camera training session", category: "Training" },
   { src: studioA, alt: "Anchoring practice with a full crew", category: "Training" },
   { src: acting, alt: "Student showcase performance", category: "Events" },
@@ -24,7 +33,13 @@ export const galleryItems: Shot[] = [
   { src: studioA, alt: "Trilingual presenting practice", category: "Presenting" },
 ];
 
-export function Gallery({ items = galleryItems, masonry = false }: { items?: Shot[]; masonry?: boolean }) {
+export function Gallery({
+  items = galleryItems,
+  masonry = false,
+}: {
+  items?: Shot[];
+  masonry?: boolean;
+}) {
   const [filter, setFilter] = useState<string>("All");
   const [active, setActive] = useState<Shot | null>(null);
 
@@ -50,7 +65,13 @@ export function Gallery({ items = galleryItems, masonry = false }: { items?: Sho
         ))}
       </div>
 
-      <div className={masonry ? "mt-8 columns-1 gap-4 sm:columns-2 lg:columns-3 [&>*]:mb-4" : "mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"}>
+      <div
+        className={
+          masonry
+            ? "mt-8 columns-1 gap-4 sm:columns-2 lg:columns-3 [&>*]:mb-4"
+            : "mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        }
+      >
         {shown.map((shot, i) => (
           <button
             key={`${shot.src}-${i}`}
@@ -75,7 +96,9 @@ export function Gallery({ items = galleryItems, masonry = false }: { items?: Sho
         ))}
       </div>
 
-      {shown.length === 0 && <p className="mt-8 text-sm text-muted-foreground">No images in this category yet.</p>}
+      {shown.length === 0 && (
+        <p className="mt-8 text-sm text-muted-foreground">No images in this category yet.</p>
+      )}
 
       {active && (
         <div
@@ -94,7 +117,11 @@ export function Gallery({ items = galleryItems, masonry = false }: { items?: Sho
             <X className="h-6 w-6" />
           </button>
           <figure className="max-h-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
-            <img src={active.src} alt={active.alt} className="max-h-[75vh] w-full rounded-lg object-contain" />
+            <img
+              src={active.src}
+              alt={active.alt}
+              className="max-h-[75vh] w-full rounded-lg object-contain"
+            />
             <figcaption className="mt-3 text-center text-sm text-white/80">
               {active.alt} — <span className="text-gold">{active.category}</span>
             </figcaption>

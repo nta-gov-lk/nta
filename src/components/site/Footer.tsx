@@ -12,13 +12,15 @@ export function Footer() {
             <Logo className="h-20 w-auto" />
           </div>
           <p className="mt-4 text-sm leading-relaxed">
-            The training academy of the Sri Lanka Rupavahini Corporation, preparing performers, presenters and
-            technicians for national television and media.
+            The training academy of the Sri Lanka Rupavahini Corporation, preparing performers,
+            presenters and technicians for national television and media.
           </p>
         </div>
 
         <div>
-          <h3 className="font-display text-sm font-bold uppercase tracking-widest text-gold">Explore</h3>
+          <h3 className="font-display text-sm font-bold uppercase tracking-widest text-gold">
+            Explore
+          </h3>
           <ul className="mt-4 space-y-2 text-sm">
             {[
               { to: "/about", label: "About the Academy" },
@@ -38,7 +40,9 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="font-display text-sm font-bold uppercase tracking-widest text-gold">Programmes</h3>
+          <h3 className="font-display text-sm font-bold uppercase tracking-widest text-gold">
+            Programmes
+          </h3>
           <ul className="mt-4 space-y-2 text-sm">
             {courses.map((c) => (
               <li key={c.id}>
@@ -51,7 +55,9 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="font-display text-sm font-bold uppercase tracking-widest text-gold">Contact</h3>
+          <h3 className="font-display text-sm font-bold uppercase tracking-widest text-gold">
+            Contact
+          </h3>
           <ul className="mt-4 space-y-3 text-sm">
             <li className="flex gap-2">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden />
@@ -81,8 +87,13 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} President's Media Division. All rights reserved. </p>
-          <p className="text-white/50">Contact details, dates and fees shown are placeholders pending confirmation.</p>
+          <p>
+            © {new Date().getFullYear()} Sri Lanka Rupavahini (TV) Corporation. Powered by
+            President's Media Division
+          </p>
+          <p className="text-white/50">
+            Contact details, dates and fees shown are placeholders pending confirmation.
+          </p>
         </div>
       </div>
     </footer>

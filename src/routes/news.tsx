@@ -10,10 +10,14 @@ export const Route = createFileRoute("/news")({
       { title: "News & Events | National Television Academy" },
       {
         name: "description",
-        content: "Intake announcements, workshops, student productions and academy events at the National Television Academy.",
+        content:
+          "Intake announcements, workshops, student productions and academy events at the National Television Academy.",
       },
       { property: "og:title", content: "News & Events — National Television Academy" },
-      { property: "og:description", content: "The latest announcements, workshops and student productions." },
+      {
+        property: "og:description",
+        content: "The latest announcements, workshops and student productions.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -58,16 +62,23 @@ function NewsPage() {
 
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           {shown.map((n) => (
-            <article key={n.id} className="flex flex-col rounded-xl border border-border bg-card p-6">
+            <article
+              key={n.id}
+              className="flex flex-col rounded-xl border border-border bg-card p-6"
+            >
               <div className="flex flex-wrap items-center gap-3">
-                <span className="rounded-full bg-primary-soft px-3 py-1 text-xs font-bold text-primary-dark">{n.category}</span>
+                <span className="rounded-full bg-primary-soft px-3 py-1 text-xs font-bold text-primary-dark">
+                  {n.category}
+                </span>
                 <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
                   <CalendarDays className="h-3.5 w-3.5" aria-hidden />
                   {n.date}
                 </span>
               </div>
               <h2 className="mt-4 text-xl font-bold leading-snug">{n.title}</h2>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{n.excerpt}</p>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+                {n.excerpt}
+              </p>
               <button
                 type="button"
                 onClick={() => setActive(n)}
@@ -88,14 +99,24 @@ function NewsPage() {
           className="fixed inset-0 z-[60] flex items-center justify-center bg-ink/80 p-4"
           onClick={() => setActive(null)}
         >
-          <div className="max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-xl bg-card p-6 sm:p-8" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-xl bg-card p-6 sm:p-8"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4">
               <div className="min-w-0">
-                <span className="rounded-full bg-primary-soft px-3 py-1 text-xs font-bold text-primary-dark">{active.category}</span>
+                <span className="rounded-full bg-primary-soft px-3 py-1 text-xs font-bold text-primary-dark">
+                  {active.category}
+                </span>
                 <h2 className="mt-3 text-2xl font-bold">{active.title}</h2>
                 <p className="mt-1 text-xs text-muted-foreground">{active.date}</p>
               </div>
-              <button type="button" aria-label="Close" onClick={() => setActive(null)} className="rounded-full p-2 hover:bg-muted">
+              <button
+                type="button"
+                aria-label="Close"
+                onClick={() => setActive(null)}
+                className="rounded-full p-2 hover:bg-muted"
+              >
                 <X className="h-5 w-5" />
               </button>
             </div>

@@ -7,7 +7,13 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { PageHero, Placeholder, Section, SectionHeading } from "@/components/site/ui-bits";
-import { admissionFaqs, admissionSteps, eligibility, intakeDates, requiredDocuments } from "@/data/site";
+import {
+  admissionFaqs,
+  admissionSteps,
+  eligibility,
+  intakeDates,
+  requiredDocuments,
+} from "@/data/site";
 
 export const Route = createFileRoute("/admissions")({
   head: () => ({
@@ -19,7 +25,10 @@ export const Route = createFileRoute("/admissions")({
           "How to apply to the National Television Academy: application steps, eligibility, documents, intake dates and fees.",
       },
       { property: "og:title", content: "Admissions — National Television Academy" },
-      { property: "og:description", content: "Step-by-step guidance on applying, eligibility and key intake dates." },
+      {
+        property: "og:description",
+        content: "Step-by-step guidance on applying, eligibility and key intake dates.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -64,7 +73,9 @@ function AdmissionsPage() {
             Download prospectus
           </button>
         </div>
-        <p className="mt-3 text-xs text-muted-foreground">Prospectus PDF placeholder — attach the official document here.</p>
+        <p className="mt-3 text-xs text-muted-foreground">
+          Prospectus PDF placeholder — attach the official document here.
+        </p>
       </Section>
 
       <Section className="bg-card">
@@ -97,10 +108,17 @@ function AdmissionsPage() {
       <Section>
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
-            <SectionHeading eyebrow="Key Dates" title="Intake calendar" intro="All dates are placeholders until the intake calendar is confirmed." />
+            <SectionHeading
+              eyebrow="Key Dates"
+              title="Intake calendar"
+              intro="All dates are placeholders until the intake calendar is confirmed."
+            />
             <ul className="mt-8 divide-y divide-border rounded-xl border border-border bg-card">
               {intakeDates.map((d) => (
-                <li key={d.label} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 p-4">
+                <li
+                  key={d.label}
+                  className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 p-4"
+                >
                   <span className="flex min-w-0 items-center gap-2 text-sm font-semibold">
                     <CalendarDays className="h-4 w-4 shrink-0 text-primary" aria-hidden />
                     <span className="truncate">{d.label}</span>
@@ -112,12 +130,18 @@ function AdmissionsPage() {
           </div>
 
           <div>
-            <SectionHeading eyebrow="Fees" title="Course fees" intro="Fee levels are set per intake and confirmed in your offer letter." />
+            <SectionHeading
+              eyebrow="Fees"
+              title="Course fees"
+              intro="Fee levels are set per intake and confirmed in your offer letter."
+            />
             <div className="mt-8 rounded-xl border-2 border-dashed border-gold bg-gold-soft p-8">
-              <p className="font-display text-lg font-bold text-primary-dark">Fee schedule placeholder</p>
+              <p className="font-display text-lg font-bold text-primary-dark">
+                Fee schedule placeholder
+              </p>
               <p className="mt-3 text-sm leading-relaxed text-foreground/80">
-                Insert the official fee table here, including registration fee, tuition per programme, any studio or
-                materials levy, and available instalment plans.
+                Insert the official fee table here, including registration fee, tuition per
+                programme, any studio or materials levy, and available instalment plans.
               </p>
               <ul className="mt-5 space-y-2 text-sm">
                 <li className="flex justify-between gap-4 border-b border-gold/40 pb-2">

@@ -8,10 +8,14 @@ export const Route = createFileRoute("/gallery")({
       { title: "Gallery | National Television Academy" },
       {
         name: "description",
-        content: "Photographs of training, acting, presenting, camera & lighting, dubbing sessions, events and facilities.",
+        content:
+          "Photographs of training, acting, presenting, camera & lighting, dubbing sessions, events and facilities.",
       },
       { property: "og:title", content: "Gallery — National Television Academy" },
-      { property: "og:description", content: "Inside the studios: training, productions, events and facilities." },
+      {
+        property: "og:description",
+        content: "Inside the studios: training, productions, events and facilities.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

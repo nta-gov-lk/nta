@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Check, CheckCircle2, ChevronLeft, ChevronRight, Upload } from "lucide-react";
 import { z } from "zod";
@@ -17,7 +17,10 @@ export const Route = createFileRoute("/apply")({
           "Submit your application to the National Television Academy in six guided steps: personal details, course, background, contact, documents and review.",
       },
       { property: "og:title", content: "Apply — National Television Academy" },
-      { property: "og:description", content: "Start your application to train in television and media." },
+      {
+        property: "og:description",
+        content: "Start your application to train in television and media.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -147,6 +150,13 @@ function ApplyPage() {
   const [data, setData] = useState<FormState>({ course: preselected ?? "" });
   const [errors, setErrors] = useState<FormState>({});
   const [submitted, setSubmitted] = useState(false);
+  const [uploadFileName, setUploadFileName] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!uploadFileName) return;
+    const timeout = window.setTimeout(() => setUploadFileName(null), 3500);
+    return () => window.clearTimeout(timeout);
+  }, [uploadFileName]);
 
   const set = (name: FieldName, value: string) => setData((d) => ({ ...d, [name]: value }));
 
@@ -170,12 +180,13 @@ function ApplyPage() {
           <CheckCircle2 className="mx-auto h-14 w-14 text-primary" aria-hidden />
           <h1 className="mt-5 text-2xl font-extrabold">Application submitted</h1>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            Thank you, {data.fullName}. Your application to the National Television Academy has been received. The
-            admissions office will contact you by email with next steps and your assessment date.
+            Thank you, {data.fullName}. Your application to the National Television Academy has been
+            received. The admissions office will contact you by email with next steps and your
+            assessment date.
           </p>
-          <p className="mt-4 rounded-md bg-gold-soft px-4 py-3 text-xs text-foreground/75">
+          {/* <p className="mt-4 rounded-md bg-gold-soft px-4 py-3 text-xs text-foreground/75">
             Reference number: [PLACEHOLDER — generated on submission]
-          </p>
+          </p> */}
           <Link
             to="/"
             className="mt-6 inline-flex rounded-md border-2 border-primary px-6 py-3 text-sm font-bold text-primary hover:bg-primary hover:text-primary-foreground"
@@ -191,6 +202,20 @@ function ApplyPage() {
 
   return (
     <>
+      {uploadFileName && (
+        <div
+          role="alert"
+          className="fixed right-5 top-5 z-50 flex max-w-sm items-center gap-3 rounded-lg border border-emerald-200 bg-white px-4 py-3 text-sm text-foreground shadow-xl"
+        >
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+            <CheckCircle2 className="h-5 w-5" aria-hidden />
+          </span>
+          <span>
+            <strong className="block font-bold text-emerald-800">Image accepted</strong>
+            <span className="text-muted-foreground">Your image has been added successfully.</span>
+          </span>
+        </div>
+      )}
       <PageHero
         eyebrow="Application"
         title="Apply to the academy"
@@ -213,7 +238,9 @@ function ApplyPage() {
                 >
                   {i < step ? <Check className="h-4 w-4" /> : i + 1}
                 </span>
-                <span className={`hidden truncate text-xs font-semibold lg:block ${i === step ? "text-primary" : "text-muted-foreground"}`}>
+                <span
+                  className={`hidden truncate text-xs font-semibold lg:block ${i === step ? "text-primary" : "text-muted-foreground"}`}
+                >
                   {s}
                 </span>
               </li>
@@ -236,9 +263,30 @@ function ApplyPage() {
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               {step === 0 && (
                 <>
-                  <Field label="Full name" name="fullName" value={data.fullName ?? ""} onChange={set} error={errors.fullName} placeholder="As on your NIC" />
-                  <Field label="NIC / Passport number" name="nic" value={data.nic ?? ""} onChange={set} error={errors.nic} maxLength={30} />
-                  <Field label="Date of birth" name="dob" type="date" value={data.dob ?? ""} onChange={set} error={errors.dob} />
+                  <Field
+                    label="Full name"
+                    name="fullName"
+                    value={data.fullName ?? ""}
+                    onChange={set}
+                    error={errors.fullName}
+                    placeholder="As on your NIC"
+                  />
+                  <Field
+                    label="NIC / Passport number"
+                    name="nic"
+                    value={data.nic ?? ""}
+                    onChange={set}
+                    error={errors.nic}
+                    maxLength={30}
+                  />
+                  <Field
+                    label="Date of birth"
+                    name="dob"
+                    type="date"
+                    value={data.dob ?? ""}
+                    onChange={set}
+                    error={errors.dob}
+                  />
                   <Field
                     label="Gender"
                     name="gender"
@@ -301,7 +349,13 @@ function ApplyPage() {
                     error={errors.education}
                     placeholder="e.g. G.C.E. A/L 2024"
                   />
-                  <Field label="School / institution" name="school" value={data.school ?? ""} onChange={set} placeholder="Optional" />
+                  <Field
+                    label="School / institution"
+                    name="school"
+                    value={data.school ?? ""}
+                    onChange={set}
+                    placeholder="Optional"
+                  />
                   <div className="sm:col-span-2">
                     <Field
                       label="Media or performance experience (optional)"
@@ -329,13 +383,50 @@ function ApplyPage() {
 
               {step === 3 && (
                 <>
-                  <Field label="Email" name="email" type="email" value={data.email ?? ""} onChange={set} error={errors.email} maxLength={255} />
-                  <Field label="Phone" name="phone" value={data.phone ?? ""} onChange={set} error={errors.phone} maxLength={30} placeholder="+94 ..." />
+                  <Field
+                    label="Email"
+                    name="email"
+                    type="email"
+                    value={data.email ?? ""}
+                    onChange={set}
+                    error={errors.email}
+                    maxLength={255}
+                  />
+                  <Field
+                    label="Phone"
+                    name="phone"
+                    value={data.phone ?? ""}
+                    onChange={set}
+                    error={errors.phone}
+                    maxLength={30}
+                    placeholder="+94 ..."
+                  />
                   <div className="sm:col-span-2">
-                    <Field label="Address" name="address" value={data.address ?? ""} onChange={set} error={errors.address} maxLength={300} />
+                    <Field
+                      label="Address"
+                      name="address"
+                      value={data.address ?? ""}
+                      onChange={set}
+                      error={errors.address}
+                      maxLength={300}
+                    />
                   </div>
-                  <Field label="City" name="city" value={data.city ?? ""} onChange={set} error={errors.city} maxLength={100} />
-                  <Field label="District" name="district" value={data.district ?? ""} onChange={set} maxLength={100} placeholder="Optional" />
+                  <Field
+                    label="City"
+                    name="city"
+                    value={data.city ?? ""}
+                    onChange={set}
+                    error={errors.city}
+                    maxLength={100}
+                  />
+                  <Field
+                    label="District"
+                    name="district"
+                    value={data.district ?? ""}
+                    onChange={set}
+                    maxLength={100}
+                    placeholder="Optional"
+                  />
                 </>
               )}
 
@@ -343,21 +434,47 @@ function ApplyPage() {
                 <div className="sm:col-span-2">
                   <div className="rounded-xl border-2 border-dashed border-gold bg-gold-soft p-8 text-center">
                     <Upload className="mx-auto h-8 w-8 text-primary" aria-hidden />
-                    <p className="mt-3 font-display font-bold text-primary-dark">Document upload placeholder</p>
-                    <p className="mx-auto mt-2 max-w-md text-sm text-foreground/75">
-                      File uploads are not yet connected. Applicants will attach their identity document, certificates,
-                      photograph and audition or voice sample here.
+                    <p className="mt-3 font-display font-bold text-primary-dark">
+                      Upload a document image
                     </p>
+                    <p className="mx-auto mt-2 max-w-md text-sm text-foreground/75">
+                      Choose an image for your identity document, certificate or passport-size
+                      photograph.
+                    </p>
+                    <label className="mt-5 inline-flex cursor-pointer rounded-md bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground hover:bg-primary-dark">
+                      Choose image
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="sr-only"
+                        onChange={(event) => {
+                          const file = event.target.files?.[0];
+                          if (file?.type.startsWith("image/")) setUploadFileName(file.name);
+                        }}
+                      />
+                    </label>
+                    {uploadFileName && (
+                      <div className="mx-auto mt-5 flex max-w-md items-center gap-2 rounded-md border border-emerald-200 bg-white px-3 py-2 text-left text-sm text-emerald-800">
+                        <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-600" aria-hidden />
+                        <span className="break-all font-medium">{uploadFileName}</span>
+                      </div>
+                    )}
                   </div>
                   <ul className="mt-5 space-y-2 text-sm text-muted-foreground">
-                    {["National Identity Card or birth certificate", "Educational certificates", "Passport-size photograph", "Audition, screen test or voice sample (if applicable)"].map(
-                      (d) => (
-                        <li key={d} className="flex items-start gap-3">
-                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" aria-hidden />
-                          {d}
-                        </li>
-                      ),
-                    )}
+                    {[
+                      "National Identity Card or birth certificate",
+                      "Educational certificates",
+                      "Passport-size photograph",
+                      "Audition, screen test or voice sample (if applicable)",
+                    ].map((d) => (
+                      <li key={d} className="flex items-start gap-3">
+                        <span
+                          className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
+                          aria-hidden
+                        />
+                        {d}
+                      </li>
+                    ))}
                   </ul>
                 </div>
               )}
@@ -374,16 +491,25 @@ function ApplyPage() {
                       ["Highest qualification", data.education],
                       ["Email", data.email],
                       ["Phone", data.phone],
-                      ["Address", [data.address, data.city, data.district].filter(Boolean).join(", ")],
+                      [
+                        "Address",
+                        [data.address, data.city, data.district].filter(Boolean).join(", "),
+                      ],
                     ].map(([label, value]) => (
-                      <div key={label as string} className="grid grid-cols-[10rem_minmax(0,1fr)] gap-4 p-4 text-sm">
+                      <div
+                        key={label as string}
+                        className="grid grid-cols-[10rem_minmax(0,1fr)] gap-4 p-4 text-sm"
+                      >
                         <dt className="font-semibold">{label}</dt>
-                        <dd className="min-w-0 break-words text-muted-foreground">{value || "—"}</dd>
+                        <dd className="min-w-0 break-words text-muted-foreground">
+                          {value || "—"}
+                        </dd>
                       </div>
                     ))}
                   </dl>
                   <p className="mt-4 text-xs text-muted-foreground">
-                    By submitting you confirm the information above is accurate. The academy will contact you by email.
+                    By submitting you confirm the information above is accurate. The academy will
+                    contact you by email.
                   </p>
                 </div>
               )}

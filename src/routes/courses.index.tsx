@@ -15,7 +15,10 @@ export const Route = createFileRoute("/courses/")({
           "Acting, television presenting, camera & lighting and dubbing programmes taught inside SLRC broadcast studios.",
       },
       { property: "og:title", content: "Courses at the National Television Academy" },
-      { property: "og:description", content: "Search and filter our acting, presenting, technical and voice programmes." },
+      {
+        property: "og:description",
+        content: "Search and filter our acting, presenting, technical and voice programmes.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -35,8 +38,13 @@ function CoursesPage() {
     () =>
       courses.filter((c) => {
         const q = query.trim().toLowerCase();
-        const matchesQuery = !q || c.title.toLowerCase().includes(q) || c.summary.toLowerCase().includes(q);
-        return matchesQuery && (category === "All" || c.category === category) && (level === "All" || c.level === level);
+        const matchesQuery =
+          !q || c.title.toLowerCase().includes(q) || c.summary.toLowerCase().includes(q);
+        return (
+          matchesQuery &&
+          (category === "All" || c.category === category) &&
+          (level === "All" || c.level === level)
+        );
       }),
     [query, category, level],
   );
@@ -54,7 +62,10 @@ function CoursesPage() {
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto_auto]">
             <label className="relative block">
               <span className="sr-only">Search courses</span>
-              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
+              <Search
+                className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+                aria-hidden
+              />
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}

@@ -53,20 +53,36 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="rounded-xl border border-border bg-card p-6 sm:p-8">
+    <form
+      onSubmit={onSubmit}
+      noValidate
+      className="rounded-xl border border-border bg-card p-6 sm:p-8"
+    >
       <h3 className="text-xl font-bold">Send an Inquiry</h3>
-      <p className="mt-1 text-sm text-muted-foreground">We reply to inquiries during office hours.</p>
+      <p className="mt-1 text-sm text-muted-foreground">
+        We reply to inquiries during office hours.
+      </p>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <label className="block text-sm font-semibold">
           Full name
           <input name="name" maxLength={100} className={field} placeholder="Your name" />
-          {errors.name && <span className="mt-1 block text-xs font-medium text-destructive">{errors.name}</span>}
+          {errors.name && (
+            <span className="mt-1 block text-xs font-medium text-destructive">{errors.name}</span>
+          )}
         </label>
         <label className="block text-sm font-semibold">
           Email
-          <input name="email" type="email" maxLength={255} className={field} placeholder="you@example.com" />
-          {errors.email && <span className="mt-1 block text-xs font-medium text-destructive">{errors.email}</span>}
+          <input
+            name="email"
+            type="email"
+            maxLength={255}
+            className={field}
+            placeholder="you@example.com"
+          />
+          {errors.email && (
+            <span className="mt-1 block text-xs font-medium text-destructive">{errors.email}</span>
+          )}
         </label>
         <label className="block text-sm font-semibold">
           Phone <span className="font-normal text-muted-foreground">(optional)</span>
@@ -75,12 +91,26 @@ export function ContactForm() {
         <label className="block text-sm font-semibold">
           Subject
           <input name="subject" maxLength={150} className={field} placeholder="Course inquiry" />
-          {errors.subject && <span className="mt-1 block text-xs font-medium text-destructive">{errors.subject}</span>}
+          {errors.subject && (
+            <span className="mt-1 block text-xs font-medium text-destructive">
+              {errors.subject}
+            </span>
+          )}
         </label>
         <label className="block text-sm font-semibold sm:col-span-2">
           Message
-          <textarea name="message" rows={5} maxLength={1000} className={field} placeholder="How can we help?" />
-          {errors.message && <span className="mt-1 block text-xs font-medium text-destructive">{errors.message}</span>}
+          <textarea
+            name="message"
+            rows={5}
+            maxLength={1000}
+            className={field}
+            placeholder="How can we help?"
+          />
+          {errors.message && (
+            <span className="mt-1 block text-xs font-medium text-destructive">
+              {errors.message}
+            </span>
+          )}
         </label>
       </div>
 
